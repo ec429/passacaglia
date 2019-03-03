@@ -35,11 +35,11 @@ def main(site=None, quiet=False, **kwargs):
     if site is None:
         site = raw_input("" if quiet else "Site name: ")
     phrase = getpass.getpass("" if quiet else "Passphrase: ")
-    pw = generate(site, phrase, **kwargs)
+    pw = generate(site, phrase, **kwargs).decode("utf8")
     if quiet:
         print(pw)
     else:
-        print("Your password is: " + pw.decode("utf8"))
+        print("Your password is: " + pw)
 
 def parse_opts():
     parser = argparse.ArgumentParser(description='Generate (or regenerate) password for a site.')
