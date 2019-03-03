@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python
 import argparse
 import base64
 import getpass
@@ -25,10 +25,10 @@ def generate(site, phrase, mxl=12):
     # If you want to use your whole device as a hardware token, or perhaps run
     # passacaglia _on_ a hardware token device, you could replace this salt
     # with some long random bit-string.
-    salt = 'Pcaglia muritic natrum'
+    salt = b'Pcaglia muritic natrum'
     # The arbitrariness of the number of rounds is another way to avoid work-
     # sharing.
-    stew = hashlib.pbkdf2_hmac('sha256', meat, salt, 333429)
+    stew = hashlib.pbkdf2_hmac('sha256', meat.encode("utf8"), salt, 333429)
     return base64.b64encode(stew)[:mxl]
 
 def main(site=None, quiet=False, **kwargs):
@@ -37,9 +37,9 @@ def main(site=None, quiet=False, **kwargs):
     phrase = getpass.getpass("" if quiet else "Passphrase: ")
     pw = generate(site, phrase, **kwargs)
     if quiet:
-        print pw
+        print(pw)
     else:
-        print "Your password is:", pw
+        print("Your password is: " + pw.decode("utf8"))
 
 def parse_opts():
     parser = argparse.ArgumentParser(description='Generate (or regenerate) password for a site.')

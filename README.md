@@ -77,6 +77,5 @@ is a lot more vulnerable than your home desktop PC.
 Dependencies
 ------------
 
-Passacaglia requires Python.  It is written for Python 2.7, but shouldn't be
-difficult to port to Python 3.
+Passacaglia requires Python; it will run on both Python 2.7 and Python 3.6.
 All library functions used come from the Python Standard Library.
